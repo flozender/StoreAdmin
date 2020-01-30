@@ -5,6 +5,7 @@ const request = require('request');
 const urlExists = require('url-exists');
 const cookieParser = require('cookie-parser');
 var path = require('path');
+var glob = require('glob');
 const mongoose = require('mongoose');
 let moment = require('moment');
 
@@ -39,6 +40,8 @@ app.use('/products/view', express.static(__dirname + '/'));
 
 app.use('/billing', express.static(__dirname + '/'));
 app.use('/billing/quotation', express.static(__dirname + '/'));
+app.use( express.static(__dirname + '/'));
+
 
 
 // CODE STARTS HERE
@@ -173,16 +176,24 @@ app.get('/products/get', async(req, res) => {
 });
 
 app.get('/products/view/:productId', async(req, res) => {
-
-  res.render('products/view-product', {
-    data: {
-      productId: req.params.productId
-    }
+  let productId = req.params.productId;
+  glob("dist/img/products/"+ productId +"/*.*", null, function (er, files) {
+    body = {
+      files: files,
+      productId: productId
+    };
+    res.render('products/view-product', {data: body});
   });
 });
 
 app.get('/products/gallery', async(req, res) => {
-  res.render('products/get-gallery');
+  glob("dist/img/products/**/*.*", null, function (er, files) {
+    body = {
+      files: files
+    };
+    res.render('products/get-gallery', {data: body});
+  });
+ 
 });
 
 app.get('/products/hsn', async(req, res) => {

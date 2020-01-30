@@ -96,12 +96,13 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
             <% } else { %>
             <% for (let j = 0; j < data.quotations[0].quotationProducts.length; j++ ){ %>
             <tr>
               <td><%= j+1 %></td>
               <td><%= data.quotations[0].quotationProducts[j].productId %></td>
-              <td><%= data.quotations[0].quotationProducts[j].productName %></td>
+              <td><img src="/dist/img/products/<%= data.quotations[0].quotationProducts[j].productId %>/0.jpg" class="img-fluid mb-2"/><b><%= data.quotations[0].quotationProducts[j].productName %></b></td>
               <td><%= data.quotations[0].quotationProducts[j].quantity %></td>
               <td><%= data.quotations[0].quotationProducts[j].price %></td>
               <td class = "qSubVals" ><%= data.quotations[0].quotationProducts[j].amount %></td>

@@ -54,22 +54,13 @@
                   </div>
                   <div class="card-body">
                     <div class="row">
+                      <% for (let i = 0; i < data.files.length; i++){ %>
                       <div class="col-sm-2">
-                        <a href="..\dist\img\chair1.jpg" data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
-                          <img src="..\dist\img\chair1.jpg" class="img-fluid mb-2" alt="white sample"/>
+                        <a href="<%= data.files[i] %>" data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
+                          <img src="<%= data.files[i] %>" class="img-fluid mb-2" alt="white sample"/>
                         </a>
                       </div>
-                      <div class="col-sm-2">
-                        <a href="..\dist\img\chair4.jpg" data-toggle="lightbox" data-title="sample 2 - black" data-gallery="gallery">
-                          <img src="..\dist\img\chair4.jpg" class="img-fluid mb-2" alt="black sample"/>
-                        </a>
-                      </div>
-                      <div class="col-sm-2">
-                        <a href="..\dist\img\chair5.jpg" data-toggle="lightbox" data-title="sample 3 - red" data-gallery="gallery">
-                          <img src="..\dist\img\chair5.jpg" class="img-fluid mb-2" alt="red sample"/>
-                        </a>
-                      </div>
-                      
+                      <% } %>
                     </div>
                   </div>
                 </div>
