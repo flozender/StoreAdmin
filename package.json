@@ -32,7 +32,6 @@
     "docs-compile": "cd docs/ && bundle exec jekyll build -d ../docs_html",
     "docs-serve": "cd docs/ && bundle exec jekyll serve",
     "docs-prepare": "node build/npm/DocsPublish.js -v",
-    "install": "npm run plugins",
     "js": "npm-run-all --sequential js-compile js-minify",
     "js-compile": "rollup --config build/config/rollup.config.js --sourcemap",
     "js-minify": "terser --compress typeofs=false --mangle --comments \"/^!/\" --source-map \"content=dist/js/adminlte.js.map,includeSources,url=adminlte.min.js.map\" --output dist/js/adminlte.min.js dist/js/adminlte.js",
@@ -55,15 +54,12 @@
     "control-panel",
     "dashboard"
   ],
-  "homepage": "https://adminlte.io",
+  "homepage": "",
   "style": "dist/css/adminlte.css",
   "sass": "build/scss/AdminLTE.scss",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ColorlibHQ/AdminLTE.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ColorlibHQ/AdminLTE/issues"
+    "url": ""
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -131,7 +127,11 @@
     "sweetalert2": "^8.19.0",
     "tempusdominus-bootstrap-4": "^5.1.2",
     "toastr": "^2.1.4",
-    "url-exists": "^1.0.3"
+    "url-exists": "^1.0.3",
+    "express-fileupload": "^1.1.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.10",
+    "mongoose-unique-validator": "^2.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",

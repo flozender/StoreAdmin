@@ -6,7 +6,7 @@ const urlExists = require('url-exists');
 const cookieParser = require('cookie-parser');
 var path = require('path');
 
-let config = require('../Server/util/config');
+let config = require('./util/config');
 
 let PORT = process.env.PORT || 80;
 let serverRoute = config.serverAddress;

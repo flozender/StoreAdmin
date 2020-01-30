@@ -1,2 +1,2 @@
-web: cd ./Client && node index.js
-web: cd ./Server && node index.js
+web: node index.js
+web: node server.js
