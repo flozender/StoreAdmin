@@ -13,13 +13,13 @@ let config = require('./util/config');
 let middleware = require('./util/middleware.js');
 
 let PORT = process.env.PORT || 80;
-
-let serverRoute = config.serverAddress + PORT;
-let clientRoute = config.clientAddress + PORT;
+let serverRoute, clientRoute;
+serverRoute = config.serverAddress + PORT;
+clientRoute = config.clientAddress + PORT;
 
 // Production
-let serverRoute = "https://itwarestoremanage.herokuapp.com:" + PORT;
-let clientRoute = "https://itwarestoremanage.herokuapp.com:" + PORT;
+serverRoute = "https://itwarestoremanage.herokuapp.com:" + PORT;
+clientRoute = "https://itwarestoremanage.herokuapp.com:" + PORT;
 
 const app = express();
 app.options('*', cors());
