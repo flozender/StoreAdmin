@@ -10,7 +10,7 @@ module.exports = (app) => {
     app.get('/products', middleware.checkToken, products.findAll);
 
     // Retrieve a single product with productId
-    app.get('/products/:productId', middleware.checkToken, products.findOne);
+    app.get('/products/id/:productId', middleware.checkToken, products.findOne);
 
     // Update a product with productId
     // app.put('/products', middleware.checkToken, products.update);

@@ -70,7 +70,7 @@ const quotations = require('./controllers/quotation.controller.js');
 
 
 
-// Require contest routes
+// Require contest 
 // require('./routes/user.route.js')(app);
 // Require user routes
 require('./routes/customer.route.js')(app);
@@ -119,71 +119,6 @@ app.get('/login', async (req, res) => {
   res.render('login', {data: url});
 });
 
-app.post('/signup_', async (req, res) => {
-  // res.render('/home');
-  let options = {
-    url : serverRoute + '/signup',
-    method: 'post',
-    body: {
-      name: req.body.name,
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password,
-      password2: req.body.password2,
-      branch: req.body.branch
-    },
-    json: true
-  }
-  request(options, function(err, response, body){
-        if (body.username && body.password){
-          body.message = "Sign up successful, Account verification has been sent to your email";
-        } 
-        body.url = clientRoute;
-        res.render('error', {data: body})
-
-  });
-});
-app.post('/login_', async (req, res) => {
-  let options = {
-    url : serverRoute + '/login',
-    method: 'post',
-    body: {
-      username: req.body.username,
-      password: req.body.password
-    },
-    json: true
-  }
-  request(options, function(err, response, body){      
-    if (body.success){
-      res.cookie("token", body.token);
-      res.cookie("username", body.username);
-        if (body.admin){
-          res.redirect('admin');
-        }
-        else{
-          let url = {
-            url: clientRoute
-          };
-          res.render('temp', {data: url});
-        }
-    } else {
-      res.render('error', {data: body})
-      }
-        
-
-  });
-});
-app.get('/logout', async (req, res) => {
-  res.clearCookie('token');
-  res.clearCookie('username');
-  res.clearCookie('contestId');
-  res.redirect('/home');
-});
-
-app.get('/error', async (req, res) => {
-  res.render('error');
-});
-
 // Custome Calls Code
 
 app.get('/customers/get', async(req, res) => {
@@ -196,6 +131,7 @@ app.get('/customers/get', async(req, res) => {
     json: true
   }
   request(options, function(err, response, body){
+    console.log(body);
     if (!body){
       let body = {
         message: "No Products found"
@@ -309,7 +245,7 @@ app.get('/billing/quotation/add', async(req, res) => {
 
 request(options, function(err, response, body1){
   let options = {
-    url : serverRoute + '/customers/' + customerId,
+    url : serverRoute + '/customers/id/' + customerId,
     method: 'get',
     headers: {
       'authorization': req.cookies.token
@@ -352,6 +288,7 @@ request(options, function(err, response, body){
       
         body.quotations = productQuot;
         body.quotationId = quotationId;
+        console.log(JSON.stringify(body, null, 2));
         // console.log(JSON.stringify(body, null, 2));      
         res.render('billing/add-quotation', {data: body});
       });
@@ -365,7 +302,7 @@ app.get('/billing/quotation/print', async(req, res) => {
   let quotationId = req.cookies.quotationId;
 
    let options = {
-     url : serverRoute + '/customers/' + customerId,
+     url : serverRoute + '/customers/id/' + customerId,
      method: 'get',
      headers: {
        'authorization': req.cookies.token
@@ -408,7 +345,7 @@ app.get('/billing/quotation/print', async(req, res) => {
        
          body.quotations = productQuot;
          body.quotationId = quotationId;
-         // console.log(JSON.stringify(body, null, 2));      
+        //  console.log(JSON.stringify(body, null, 2));      
          res.render('billing/print-quotation', {data: body});
        });
      });

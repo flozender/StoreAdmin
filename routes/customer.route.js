@@ -10,7 +10,7 @@ module.exports = (app) => {
     app.get('/customers', middleware.checkToken, customers.findAll);
 
     // Retrieve a single customer with customerId
-    app.get('/customers/:customerId', middleware.checkToken, customers.findOne);
+    app.get('/customers/id/:customerId', middleware.checkToken, customers.findOne);
 
     // Retrieve a single customer with customerId
     app.get('/customers/name/:customerName', middleware.checkToken, customers.findByName);

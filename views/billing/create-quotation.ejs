@@ -186,7 +186,7 @@ import Cookies from '../../dist/js/js.cookie.mjs'
 $( "#qCustName" ).change(function() {
   // alert( "Handler for .change() called." );
   let customerName = document.getElementById("qCustName").value;
-  $.get("<%= data.serverRoute %>/customers/" + customerName, function(data, status){
+  $.get("<%= data.serverRoute %>/customers/id/" + customerName, function(data, status){
     data = data[0];
     document.getElementById("qCustId").value = data.customerId;    
     document.getElementById("qCustAddress").value = data.customerAddress;     
