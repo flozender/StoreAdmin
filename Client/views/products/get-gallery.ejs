@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ITWare India | Gallery</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ekko Lightbox -->
+  <link rel="stylesheet" href="../plugins/ekko-lightbox/ekko-lightbox.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <%- include ('../partials/header') %>
+  
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Gallery</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/home">Home</a></li>
+              <li class="breadcrumb-item active">Gallery</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <div class="card-header">
+                <div class="card-title">
+                  Product Gallery
+                </div>
+              </div>
+              <div class="card-body">
+                <div>
+                  <div class="btn-group w-100 mb-2">
+                    <a class="btn btn-info active" href="javascript:void(0)" data-filter="all"> All items </a>
+                    <a class="btn btn-info" href="javascript:void(0)" data-filter="1"> Beds </a>
+                    <a class="btn btn-info" href="javascript:void(0)" data-filter="2"> Tables </a>
+                    <a class="btn btn-info" href="javascript:void(0)" data-filter="3"> Chairs </a>
+                    <a class="btn btn-info" href="javascript:void(0)" data-filter="4"> Tables & Chairs </a>
+                  </div>
+                  <div class="mb-2">
+                    <a class="btn btn-secondary" href="javascript:void(0)" data-shuffle> Shuffle items </a>
+                    <div class="float-right">
+                      <select class="custom-select" style="width: auto;" data-sortOrder>
+                        <option value="index"> Sort by Position </option>
+                        <option value="sortData"> Sort by Custom Data </option>
+                      </select>
+                      <div class="btn-group">
+                        <a class="btn btn-default" href="javascript:void(0)" data-sortAsc> Ascending </a>
+                        <a class="btn btn-default" href="javascript:void(0)" data-sortDesc> Descending </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="filter-container p-0 row">
+                    <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
+                      <a href=".\dist\img\bed1.jpg" data-toggle="lightbox" data-title="sample 1 - white">
+                        <img src=".\dist\img\bed1.jpg" class="img-fluid mb-2" alt="white sample"/>
+                      </a>
+                    </div>
+                    <div class="filtr-item col-sm-2" data-category="2, 4" data-sort="black sample">
+                      <a href=".\dist\img\table1.jpg" data-toggle="lightbox" data-title="sample 2 - black">
+                        <img src=".\dist\img\table1.jpg" class="img-fluid mb-2" alt="black sample"/>
+                      </a>
+                    </div>
+                    <div class="filtr-item col-sm-2" data-category="3, 4" data-sort="red sample">
+                      <a href=".\dist\img\chair2.jpg" data-toggle="lightbox" data-title="sample 3 - red">
+                        <img src=".\dist\img\chair2.jpg" class="img-fluid mb-2" alt="red sample"/>
+                      </a>
+                    </div>
+                    <div class="filtr-item col-sm-2" data-category="3, 4" data-sort="red sample">
+                      <a href=".\dist\img\chair3.jpg" data-toggle="lightbox" data-title="sample 4 - red">
+                        <img src=".\dist\img\chair3.jpg" class="img-fluid mb-2" alt="red sample"/>
+                      </a>
+                    </div>
+                    <div class="filtr-item col-sm-2" data-category="2, 4" data-sort="black sample">
+                      <a href=".\dist\img\table2.jpg" data-toggle="lightbox" data-title="sample 5 - black">
+                        <img src=".\dist\img\table2.jpg" class="img-fluid mb-2" alt="black sample"/>
+                      </a>
+                    </div>
+                    <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
+                      <a href=".\dist\img\bed3.jpg" data-toggle="lightbox" data-title="sample 6 - white">
+                        <img src=".\dist\img\bed3.jpg" class="img-fluid mb-2" alt="white sample"/>
+                      </a>
+                    </div>
+                    <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
+                      <a href=".\dist\img\bed2.jpg" data-toggle="lightbox" data-title="sample 7 - white">
+                        <img src=".\dist\img\bed2.jpg" class="img-fluid mb-2" alt="white sample"/>
+                      </a>
+                    </div>
+                    <div class="filtr-item col-sm-2" data-category="2, 4" data-sort="black sample">
+                      <a href=".\dist\img\table3.jpg" data-toggle="lightbox" data-title="sample 8 - black">
+                        <img width = "300" height = "10" src=".\dist\img\table3.jpg" class="img-fluid mb-2" alt="black sample"/>
+                      </a>
+                    </div>
+                    <div class="filtr-item col-sm-2" data-category="3, 4" data-sort="red sample">
+                      <a href=".\dist\img\chair1.jpg" data-toggle="lightbox" data-title="sample 9 - red">
+                        <img src=".\dist\img\chair1.jpg" class="img-fluid mb-2" alt="red sample"/>
+                      </a>
+                    </div>
+
+                    <div class="filtr-item col-sm-2" data-category="2, 4" data-sort="black sample">
+                      <a href=".\dist\img\table4.jpg" data-toggle="lightbox" data-title="sample 12 - black">
+                        <img src=".\dist\img\table4.jpg" class="img-fluid mb-2" alt="black sample"/>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+    <%- include ('../partials/footer') %>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery UI -->
+<script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Ekko Lightbox -->
+<script src="../plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- Filterizr-->
+<script src="../plugins/filterizr/jquery.filterizr.min.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.filter-container').filterizr({gutterPixels: 3});
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
+    });
+  })
+</script>
+<script>
+    window.onload = function() {
+  document.getElementById('getGallery').className = 'nav-link active';
+};
+</script>
+</body>
+</html>

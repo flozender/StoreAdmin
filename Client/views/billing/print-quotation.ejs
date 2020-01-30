@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ITWare India | Invoice</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 4 -->
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper" id = "bill">
+  <!-- Main content -->
+  <section class="invoice">
+    <!-- title row -->
+    <div class="row">
+      <div class="col-12">
+        <h2 class="page-header">
+          <i class="fas fa-globe"></i>ITWare India
+          <small class="float-right">Date: <%= data.today %> </small>
+        </h2>
+        <b>Quotation ID: <%= data.quotationId %></b><br>
+        <br>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- info row -->
+    <div class="row invoice-info">
+      <div class="col-sm-4 invoice-col">
+        From
+        <address>
+          <strong>ITWare India</strong><br>
+          795 Folsom Ave, Suite 600<br>
+          Hyderabad, India 500023<br>
+          Phone: (804) 123-5432<br>
+          Email: itware@itwareindia.in
+        </address>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-4 invoice-col">
+        To
+        <address>
+          <strong><%= data.customerName %></strong><br>
+          <%= data.customerAddress %><br>
+          Phone: <%= data.customerPh %><br>
+          Email: <%= data.customerEmail %>
+        </address>
+      </div>
+      <!-- /.col -->
+      <!-- <div class="col-sm-4 invoice-col">
+        <b>Invoice #007612</b><br>
+        <br>
+        <b>Order ID:</b> 4F3S8J<br>
+        <b>Payment Due:</b> 2/22/2014<br>
+        <b>Account:</b> 968-34567
+      </div> -->
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Table row -->
+    <div class="row">
+      <div class="col-12 table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>#</th>
+                <th>Product ID</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price (₹)</th>
+                <th>Amount (₹)</th>
+                <th>Discount (%)</th>
+                <th>Tax (%)</th>
+                <th>Net Amount (₹)</th>
+              </tr>
+          </thead>
+          <tbody>
+            <% if (data.quotations.length === 0 || data.quotations[0].quotationProducts.length === 0){ %>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            <% } else { %>
+            <% for (let j = 0; j < data.quotations[0].quotationProducts.length; j++ ){ %>
+            <tr>
+              <td><%= j+1 %></td>
+              <td><%= data.quotations[0].quotationProducts[j].productId %></td>
+              <td><%= data.quotations[0].quotationProducts[j].productName %></td>
+              <td><%= data.quotations[0].quotationProducts[j].quantity %></td>
+              <td><%= data.quotations[0].quotationProducts[j].price %></td>
+              <td class = "qSubVals" ><%= data.quotations[0].quotationProducts[j].amount %></td>
+              <td class = "qDiscVals"><%= data.quotations[0].quotationProducts[j].discount %></td>
+              <td class = "qTaxVals"><%= data.quotations[0].quotationProducts[j].tax %></td>
+              <td class = "qNetVals"><%= data.quotations[0].quotationProducts[j].net %></td>
+            </tr>
+            <% } %>
+            <% } %>
+            </tbody>
+        </table>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <!-- accepted payments column -->
+      <div class="col-6">
+        <!-- <p class="lead">Payment Methods:</p>
+        <img src="../../dist/img/credit/visa.png" alt="Visa">
+        <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+        <img src="../../dist/img/credit/american-express.png" alt="American Express">
+        <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+
+        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+          Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr
+          jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+        </p> -->
+      </div>
+      <!-- /.col -->
+      <div class="col-6">
+        <!-- <p class="lead">Amount Due 2/22/2014</p> -->
+
+        <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th style="width:50%">Subtotal:</th>
+                <td id = "tSub">₹0</td c>
+              </tr>
+              <tr>
+                <th>Discount:</th>
+                <td id = "tDisc">₹0</td>
+              </tr>
+              <tr>
+                <th>Tax:</th>
+                <td id = "tTax">₹0</td>
+              </tr>
+              <tr>
+                <th>Total:</th>
+                <td id = "tNet">₹0</td>
+              </tr>
+            </table>
+          </div>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- ./wrapper -->
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<!-- date-range-picker -->
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<script src="../../dist/js/jspdf.min.js"></script>
+
+
+<script type="text/javascript"> 
+  window.addEventListener("load", window.print());
+</script>
+<script>
+
+    var subArray = [];
+    var discArray = [];
+    var taxArray = [];
+    var netArray = [];
+    var totalSub, totalDisc, totalTax, totalNet;
+    var afterDisc, disc, tax;
+  
+    $( ".qSubVals" ).each(function( index ) {
+    subArray[index] = parseFloat($( this ).text() );
+    })
+  
+    $( ".qDiscVals" ).each(function( index ) {
+      disc = parseFloat($( this ).text() );
+      discArray[index] = parseFloat((subArray[index] * disc) / 100)
+    })
+  
+    $( ".qTaxVals" ).each(function( index ) {
+      tax = parseFloat($( this ).text() );
+      afterDisc = subArray[index] - discArray[index];
+      taxArray[index] = ((afterDisc * tax)/100);
+    })
+  
+    $( ".qNetVals" ).each(function( index ) {
+      netArray[index] = parseFloat($( this ).text() );
+    })
+  
+  $(document).ready(function() {
+    totalSub = subArray.reduce((a, b) => a + b, 0);
+    totalDisc = discArray.reduce((a, b) => a + b, 0); 
+    totalTax = taxArray.reduce((a, b) => a + b, 0); 
+    totalNet = netArray.reduce((a, b) => a + b, 0);
+  
+    $("#tSub").html("₹" +totalSub);
+  
+    $("#tDisc").html("-₹" +totalDisc);
+  
+    $("#tTax").html("+₹" +totalTax);
+  
+    $("#tNet").html("₹" +totalNet);
+  
+  });
+  var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+
+
+  </script>
+</body>
+</html>
