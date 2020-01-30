@@ -10,6 +10,7 @@ var path = require('path');
 
 let config = require('./util/config');
 let middleware = require('./util/middleware.js');
+let PORT = process.env.PORT || 5000;
 
 // INIT
 const app = express();
@@ -149,4 +150,4 @@ app.post('/testPost', async (req, res) => {
 //   }
 // });
 
-app.listen(5000,()=>console.log('Server @ port 5000'));
+app.listen(PORT,()=>console.log('Server @ port 5000'));

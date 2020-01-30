@@ -8,7 +8,7 @@ var path = require('path');
 
 let config = require('../Server/util/config');
 
-
+let PORT = process.env.PORT || 80;
 let serverRoute = config.serverAddress;
 let clientRoute = config.clientAddress;
 
@@ -374,5 +374,5 @@ app.get('/billing/invoice', async(req, res) => {
 });
 
 
-app.listen(80);
+app.listen(PORT);
 console.log('Server @ port 80');
