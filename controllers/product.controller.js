@@ -149,10 +149,8 @@ exports.delete = (req, res) => {
 };
 
 exports.getDetails = (req, callback) => {
-    console.log(req.body.productId);
     Product.find({productId: req.body.productId})
     .then(product => {
-        console.log(product);
         if(!product) {
             return callback("Product not found ", null);         
         }

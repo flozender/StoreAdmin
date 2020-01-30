@@ -115,7 +115,6 @@ exports.addItem = (req, res) => {
                         tax: tax,
                         net: (net + (net*tax)/100)
                     };
-                    console.log(newProduct);
     
                     quotation = quotation[0];
     
@@ -162,7 +161,6 @@ exports.delItem = (req, res) => {
     let productId = delId.slice(0,sep);
     let net = eval(delId.slice(sep+1, ));
     let quotationId = req.params.quotationId;
-    console.log(productId, net, quotationId);
 
     Quotation.findOneAndUpdate({quotationId: quotationId}, {$pull:
         {quotationProducts: { productId: productId, net: net } }
@@ -170,7 +168,6 @@ exports.delItem = (req, res) => {
             if (err) {
                 console.log("Something wrong when updating data!");
             }
-            console.log("nice >>",doc);
     })
     .then(quotation => {
         if(!quotation) {

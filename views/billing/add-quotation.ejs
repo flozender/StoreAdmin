@@ -381,7 +381,6 @@ $( "#qSubmit" ).click(function() {
     quantity: quantity
   }
   $.post("<%= data.serverRoute %>/quotations/<%= data.quotationId %>", postData, function(data, status, jqXHR){
-      console.log(data,status);
     window.location = "<%= data.clientRoute %>/billing/quotation/add";
     });
 });
@@ -433,7 +432,6 @@ $(document).ready(function() {
 
 $( ".qDel" ).click(function() {
   var delId = $(this).val();
-  console.log(delId);
 
   let postData = {
     delId: delId

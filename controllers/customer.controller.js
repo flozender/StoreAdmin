@@ -71,7 +71,6 @@ exports.findByName = (req, res) => {
 // Create and Save a new customer
 exports.create = (req, res) => {
     // Validate request
-    console.log(req.body);
     if(!req.body.customerId || !req.body.password) {
         return res.status(400).send({
             success: false,

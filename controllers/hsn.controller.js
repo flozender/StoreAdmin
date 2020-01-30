@@ -100,9 +100,7 @@ exports.getDetails = (req, callback) => {
         }
         hsn = hsn[0]
         let tax = hsn.IGST + hsn.SGST + hsn.CGST;
-        console.log("TAX IS HERE", tax);
         hsn.tax = tax;
-        console.log(hsn);
 
         return callback(null, hsn);
     }).catch(err => {

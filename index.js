@@ -83,7 +83,6 @@ require('./routes/hsn.route.js')(app);
 
 // Examples
 app.get('/testGet', async (req, res) => {
-  console.log("Tested Get");
   res.json({status: "working"});
 
 });
@@ -131,7 +130,6 @@ app.get('/customers/get', async(req, res) => {
     json: true
   }
   request(options, function(err, response, body){
-    console.log(body);
     if (!body){
       let body = {
         message: "No Products found"
@@ -288,7 +286,6 @@ request(options, function(err, response, body){
       
         body.quotations = productQuot;
         body.quotationId = quotationId;
-        console.log(JSON.stringify(body, null, 2));
         // console.log(JSON.stringify(body, null, 2));      
         res.render('billing/add-quotation', {data: body});
       });
@@ -368,4 +365,4 @@ app.get('/billing/invoice', async(req, res) => {
 
 
 app.listen(PORT);
-console.log('Server @ port 80');
+console.log('Running @ port 80');
