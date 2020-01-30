@@ -5,8 +5,11 @@ const request = require('request');
 const urlExists = require('url-exists');
 const cookieParser = require('cookie-parser');
 var path = require('path');
+const mongoose = require('mongoose');
+let moment = require('moment');
 
 let config = require('./util/config');
+let middleware = require('./util/middleware.js');
 
 let PORT = process.env.PORT || 80;
 let serverRoute = config.serverAddress;
@@ -37,6 +40,59 @@ app.use('/products/view', express.static(__dirname + '/'));
 app.use('/billing', express.static(__dirname + '/'));
 app.use('/billing/quotation', express.static(__dirname + '/'));
 
+
+// CODE STARTS HERE
+
+mongoose.Promise = global.Promise;
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', false);
+moment.suppressDeprecationWarnings = true;
+
+dbConfig = {
+  url: config.dbURL
+}
+// Connecting to the database
+mongoose.connect(dbConfig.url, {
+    useNewUrlParser: true
+}).then(() => {
+    console.log("Successfully connected to the database");    
+}).catch(err => {
+    console.log('Could not connect to the database. Exiting now...', err);
+    process.exit();
+});
+
+// Imports
+const users = require('./controllers/user.controller.js');
+const customers = require('./controllers/customer.controller.js');
+const hsns = require('./controllers/hsn.controller.js');
+const products = require('./controllers/product.controller.js');
+const quotations = require('./controllers/quotation.controller.js');
+
+
+
+// Require contest routes
+// require('./routes/user.route.js')(app);
+// Require user routes
+require('./routes/customer.route.js')(app);
+// Require question routes
+require('./routes/product.route.js')(app);
+// Require submission routes
+require('./routes/quotation.route.js')(app);
+// Require participation routes
+require('./routes/hsn.route.js')(app);
+
+// Examples
+app.get('/testGet', async (req, res) => {
+  console.log("Tested Get");
+  res.json({status: "working"});
+
+});
+
+app.post('/testPost', async (req, res) => {
+  console.log('request body');
+  console.log(req.body);
+  res.json(req.body);
+});
 
 // app.use('/contests/questions', express.static(__dirname + '/'));
 // app.use('/admin', express.static(__dirname + '/'));
