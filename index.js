@@ -12,8 +12,8 @@ let config = require('./util/config');
 let middleware = require('./util/middleware.js');
 
 let PORT = process.env.PORT || 80;
-let serverRoute = config.serverAddress;
-let clientRoute = config.clientAddress;
+let serverRoute = config.serverAddress + PORT;
+let clientRoute = config.clientAddress + PORT;
 
 const app = express();
 app.options('*', cors());
