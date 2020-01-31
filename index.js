@@ -180,12 +180,17 @@ app.get('/products/get', async(req, res) => {
 
 
 app.get('/products/add', async(req, res) => {
+
+    products.getAll((err, prods) => {
       let body = {
         message: "No Products found",
         serverRoute: serverRoute,
         clientRoute: clientRoute
-      };
+    };
+    body.products = prods;
     res.render('products/add-products', {data: body});
+    });
+
 });
 
 app.get('/products/view/:productId', async(req, res) => {
@@ -394,6 +399,32 @@ app.get('/billing/invoice', async(req, res) => {
   res.render('message', {data:body});
 });
 
+app.post('/uploadImage/:productId', async (req, res) => {
+  if (req.files){
+    // console.log(req.files);
+    fs.readdir('./dist/img/products/' + req.params.productId, (err, lenOfFiles) => {
+      let fLen = lenOfFiles.length;
+      let file = req.files.productImage,
+      filename = file.name;
+      console.log("LENGTH",fLen);
+      file.mv("./dist/img/products/" + req.params.productId +"/" + fLen + '.jpg', function(err){
+        if(err){
+        console.log(err);
+        res.send("error occured");
+      }
+      else{
+        res.json({
+          success: true,
+          message: "uploaded",
+          filename: filename
+        });
+      }
+      });  
+    });
+  } else{
+    res.send("Failed");
+  }
+});
 
 app.listen(PORT);
 console.log('Running @ port 80');

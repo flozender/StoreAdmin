@@ -53,6 +53,16 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.getAll = (callback) => {
+    Product.find({})
+    .then(products => {
+        // console.log(products);
+        return callback(null, products);
+    }).catch(err => {
+        return callback("Error", null);
+    });
+};
+
 // Find a single product with a productId
 exports.findOne = (req, res) => {
     Product.find({productId: req.params.productId})

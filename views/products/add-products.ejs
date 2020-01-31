@@ -41,7 +41,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Customer</h1>
+            <h1>Add Product</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -72,23 +72,23 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Product ID</label>
-                  <input type="text" class="form-control" id = "qCustId" style="width: 100%;" >
+                  <input type="text" class="form-control" id = "qProdId" style="width: 100%;" >
                 </div>
                 <div class="form-group">
                     <label>Product Name</label>
-                    <input type = "text" class="form-control" id = "qCustName" style="width: 100%;" >
+                    <input type = "text" class="form-control" id = "qProdName" style="width: 100%;" >
                   </div>
                   <div class="form-group">
                     <label>Height</label>
-                    <input type="text" class="form-control" id = "qCustAddress" style="width: 100%;" >
+                    <input type="text" class="form-control" id = "qProdH" style="width: 100%;" >
                   </div>
                   <div class="form-group">
                     <label>Width</label>
-                    <input type="text" class="form-control" id = "qCustAddress" style="width: 100%;" >
+                    <input type="text" class="form-control" id = "qProdW" style="width: 100%;" >
                   </div>
                   <div class="form-group">
                     <label>Length</label>
-                    <input type="text" class="form-control" id = "qCustAddress" style="width: 100%;" >
+                    <input type="text" class="form-control" id = "qProdL" style="width: 100%;" >
                   </div>
               </div>
               <!-- /.col -->
@@ -96,28 +96,17 @@
 
                 <div class="form-group">
                     <label>Purchase Value</label>
-                    <input type="text" class="form-control" id = "qCustAddress" style="width: 100%;" >
+                    <input type="text" class="form-control" id = "qProdPV" style="width: 100%;" >
                   </div>
                   <div class="form-group">
                     <label>Selling Value</label>
-                    <input type="text" class="form-control" id = "qCustAddress" style="width: 100%;" >
+                    <input type="text" class="form-control" id = "qProdSV" style="width: 100%;" >
                   </div>
                   <div class="form-group">
                     <label>HSN Code</label>
-                    <input type="text" class="form-control" id = "qCustAddress" style="width: 100%;" >
+                    <input type="text" class="form-control" id = "qProdHSN" style="width: 100%;" >
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
-                      </div>
-                    </div>
-                  </div>
+
 
                 <!-- /.form-group -->
               </div>
@@ -133,10 +122,54 @@
         <!-- /.card -->
         <div class="row">
           <div class="col-12">
-            <!-- <div class="callout callout-info">
-              <h5><i class="fas fa-info"></i> Note:</h5>
-              This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-            </div> -->
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">Image Upload</h3>
+    
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-remove"></i></button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Product ID</label>
+                      <select class="form-control select2" id = "iProdId" style="width: 100%;">
+                        <option selected = "selected">-</option>
+                        <% for (let i = 0; i < data.products.length; i++){ %>
+                          <option value="<%= data.products[i].productId %>"><%= data.products[i].productId %> - <%= data.products[i].productName %></option val>
+                          <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="iProdImg">File input</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="iProdImg">
+                            <label class="custom-file-label" for="iProdImg">Choose Photos</label>
+                          </div>
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="iSubmit">Upload</span>
+                          </div>
+                        </div>
+                      </div> 
+                    <!-- /.form-group -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-body -->
+              <!-- <div class="card-footer">
+                <button type="submit" id = "iSubmit" class="btn btn-primary">Proceed</button>
+              </div> -->
+            </div>
           </div><!-- /.col -->
       </div><!-- /.container-fluid -->
       
@@ -200,32 +233,62 @@ document.getElementById('prod').className = 'nav-link active';
 
     $( "#qSubmit" ).click(function() {
 
-      let customerId = document.getElementById("qCustId").value;
-      let customerName = document.getElementById("qCustName").value;
-      let customerPh = document.getElementById("qCustPhone").value;
-      let customerAddress = document.getElementById("qCustAddress").value;
-      let customerEmail = document.getElementById("qCustEmail").value;
+      let productId = document.getElementById("qProdId").value;
+      let productName = document.getElementById("qProdName").value;
+      let productL = document.getElementById("qProdL").value;
+      let productW = document.getElementById("qProdW").value;
+      let productH = document.getElementById("qProdH").value;
+      let productHSN = document.getElementById("qProdHSN").value;
+      let productPV = document.getElementById("qProdPV").value;
+      let productSV = document.getElementById("qProdSV").value;
 
-      var txt = $('#qCustId');  
+
+
+      var txt = $('#qProdId');  
     
       if (txt.val() != null && txt.val() != '') {  
             let postData = {
-                customerId: customerId,
-                customerName: customerName,
-                customerPh: customerPh,
-                customerAddress: customerAddress,
-                customerEmail: customerEmail
+                productId: productId,
+                productName: productName,
+                productL: productL,
+                productH: productH,
+                productW: productW,
+                productPV: productPV,
+                productSV: productSV,
+                productHSN: productHSN
             }
-            console.log(postData);
-            $.post("<%= data.serverRoute %>/customers", postData, function(data, status, jqXHR){
-                window.location = "<%= data.clientRoute %>/customers/get";
+            $.post("<%= data.serverRoute %>/products", postData, function(data, status, jqXHR){
+                window.location = "<%= data.clientRoute %>/products/add";
             });
         } else {  
-          alert('Please enter Customer ID');  
+          alert('Please enter product ID');  
         }
-    
-    
     });
+
+    $( "#iSubmit" ).click(function() {
+
+  let productId = document.getElementById("iProdId").value;
+  let productImage = document.getElementById("iProdImg").value;
+
+
+
+  var txt = $('#iProdId');  
+
+  if (txt.val() != null && txt.val() != '') {  
+        let postData = {
+            productId: productId,
+            productImage: productImage
+        }
+        console.log(postData);
+        $.post("<%= data.serverRoute %>/uploadImage/"+ productId, postData, function(data, status, jqXHR){
+            window.location = "<%= data.clientRoute %>/products/add";
+        });
+    } else {  
+      alert('Please enter product ID');  
+    }
+
+
+});
     </script>
 </body>
 </html>
