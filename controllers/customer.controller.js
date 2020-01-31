@@ -71,7 +71,7 @@ exports.findByName = (req, res) => {
 // Create and Save a new customer
 exports.create = (req, res) => {
     // Validate request
-    if(!req.body.customerId || !req.body.password) {
+    if(!req.body.customerId || !req.body.customerName) {
         return res.status(400).send({
             success: false,
             message: "details can not be empty!"

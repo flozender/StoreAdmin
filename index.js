@@ -148,9 +148,7 @@ app.get('/customers/get', async(req, res) => {
   });  
 });
 
-app.get('/customers/add', async(req, res) => {
-  res.render('message');
-});
+
 
 app.get('/customers/delete', async(req, res) => {
   res.render('message');
@@ -178,6 +176,16 @@ app.get('/products/get', async(req, res) => {
     // console.log(body);
     res.render('products/get-products', {data: body});
   });
+});
+
+
+app.get('/products/add', async(req, res) => {
+      let body = {
+        message: "No Products found",
+        serverRoute: serverRoute,
+        clientRoute: clientRoute
+      };
+    res.render('products/add-products', {data: body});
 });
 
 app.get('/products/view/:productId', async(req, res) => {
@@ -238,6 +246,13 @@ app.get('/billing/quotation', async(req, res) => {
   });
 });
 
+app.get('/customers/add', async(req, res) => {
+    // console.log(body);
+    let body = {};
+    body.serverRoute = serverRoute;
+    body.clientRoute = clientRoute;
+    res.render('customers/add-customers', {data: body});
+});
 
 
 app.get('/billing/quotation/add', async(req, res) => {

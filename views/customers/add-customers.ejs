@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ITWare India | Create Quotation</title>
+  <title>ITWare India | Add Customer </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -41,12 +41,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create Quotation</h1>
+            <h1>Add Customer</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/home">Home</a></li>
-              <li class="breadcrumb-item active">Billing</li>
+              <li class="breadcrumb-item active">Customers</li>
             </ol>
           </div>
         </div>
@@ -71,36 +71,37 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Quotation ID</label>
-                  <input type="text" class="form-control" id = "qQuotId" style="width: 100%;" >
-                </div>
-                <div class="form-group">
                   <label>Customer ID</label>
-                  <input type="text" class="form-control" id = "qCustId" style="width: 100%;" readonly>
+                  <input type="text" class="form-control" id = "qCustId" style="width: 100%;" >
                 </div>
-                <!-- /.form-group -->
                 <div class="form-group">
-                  <label>Customer Address</label>
-                  <input type = "text" class="form-control" id = "qCustAddress" style="width: 100%;" readonly>
-                </div>
+                    <label>Customer Name</label>
+                    <input type = "text" class="form-control" id = "qCustName" style="width: 100%;" >
+                  </div>
+                  <div class="form-group">
+                    <label>Customer Address</label>
+                    <input type="text" class="form-control" id = "qCustAddress" style="width: 100%;" >
+                  </div>
+ 
+                <!-- /.form-group -->
+
                 <!-- /.form-group -->
               </div>
               <!-- /.col -->
               <div class="col-md-6">
-                <div class="form-group">
-                  <label>Customer Name</label>
-                  <select class="form-control select2" id = "qCustName" style="width: 100%;">
-                    <option selected = "selected">-</option>
-                    <% for (let i = 0; i < data.length; i++){ %>
-                      <option value="<%= data[i].customerId %>"><%= data[i].customerName %></option val>
-                      <% } %>
-                  </select>
-                </div>
+
                 <!-- /.form-group -->
                 <div class="form-group">
-                  <label>Customer Phone</label>
-                  <input type = "text" class="form-control" id = "qCustPhone" style="width: 100%;" readonly>
-                </div>
+                    <label>Customer Email</label>
+                    <input type = "text" class="form-control" id = "qCustEmail" style="width: 100%;" >
+                  </div>
+
+
+                <div class="form-group">
+                    <label>Customer Phone</label>
+                    <input type = "text" class="form-control" id = "qCustPhone" style="width: 100%;" >
+                  </div>
+
                 <!-- /.form-group -->
               </div>
               <!-- /.col -->
@@ -172,48 +173,42 @@
 </script>
 <script>
   window.onload = function() {
-document.getElementById('addQuot').className = 'nav-link active';
-document.getElementById('quot').className = 'nav-link active';
+document.getElementById('addCust').className = 'nav-link active';
+document.getElementById('cust').className = 'nav-link active';
 
 };
 </script>
-<script type="module" src="../../dist/js/js.cookie.mjs"></script>
-<script type = "module">
-// JQuery Change
-import Cookies from '../../dist/js/js.cookie.mjs'
+<script>
 
 
-$( "#qCustName" ).change(function() {
-  // alert( "Handler for .change() called." );
-  let customerName = document.getElementById("qCustName").value;
-  $.get("<%= data.serverRoute %>/customers/id/" + customerName, function(data, status){
-    data = data[0];
-    document.getElementById("qCustId").value = data.customerId;    
-    document.getElementById("qCustAddress").value = data.customerAddress;     
-    document.getElementById("qCustPhone").value = data.customerPh;
+    $( "#qSubmit" ).click(function() {
+
+      let customerId = document.getElementById("qCustId").value;
+      let customerName = document.getElementById("qCustName").value;
+      let customerPh = document.getElementById("qCustPhone").value;
+      let customerAddress = document.getElementById("qCustAddress").value;
+      let customerEmail = document.getElementById("qCustEmail").value;
+
+      var txt = $('#qCustId');  
+    
+      if (txt.val() != null && txt.val() != '') {  
+            let postData = {
+                customerId: customerId,
+                customerName: customerName,
+                customerPh: customerPh,
+                customerAddress: customerAddress,
+                customerEmail: customerEmail
+            }
+            console.log(postData);
+            $.post("<%= data.serverRoute %>/customers", postData, function(data, status, jqXHR){
+                window.location = "<%= data.clientRoute %>/customers/get";
+            });
+        } else {  
+          alert('Please enter Customer ID');  
+        }
+    
+    
     });
-});
-
-$( "#qSubmit" ).click(function() {
-  // alert( "Handler for .change() called." );
-
-
-
-  let customerId = document.getElementById("qCustId").value;
-  var txt = $('#qQuotId');  
-
-  if (txt.val() != null && txt.val() != '') {  
-    Cookies.set('customerId', customerId);
-    Cookies.set('quotationId', txt.val());
-
-    window.location = "<%= data.clientRoute %>/billing/quotation/add";
-  
-    } else {  
-      alert('Please enter quotation ID');  
-    }
-
-
-});
-</script>
+    </script>
 </body>
 </html>

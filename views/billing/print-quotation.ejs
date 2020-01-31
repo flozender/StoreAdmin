@@ -27,9 +27,9 @@
       <div class="col-12">
         <h2 class="page-header">
           <i class="fas fa-globe"></i>ITWare India
-          <small class="float-right">Date: <%= data.today %> </small>
+          <small class="float-right"> </small>
         </h2>
-        <b>Quotation ID: <%= data.quotationId %></b><br>
+        <!-- <b>Quotation ID: <%= data.quotationId %></b><br> -->
         <br>
       </div>
       <!-- /.col -->
@@ -40,10 +40,10 @@
         From
         <address>
           <strong>ITWare India</strong><br>
-          795 Folsom Ave, Suite 600<br>
+          202, Delta Seacon, Banjara Hills<br>
           Hyderabad, India 500023<br>
-          Phone: (804) 123-5432<br>
-          Email: itware@itwareindia.in
+          Phone: (+91) 770-264-7950<br>
+          Email: mufeez@itwareindia.in
         </address>
       </div>
       <!-- /.col -->
@@ -55,6 +55,12 @@
           Phone: <%= data.customerPh %><br>
           Email: <%= data.customerEmail %>
         </address>
+      </div>
+      <div class="col-sm-4 invoice-col">
+        <br>
+        <b>Quotation ID: <%= data.quotationId %></b><br>
+        <b>Date: <%= data.today %></b><br>
+        <!-- <b>Valid Till:</b> 2/22/2014<br> -->
       </div>
       <!-- /.col -->
       <!-- <div class="col-sm-4 invoice-col">
@@ -81,7 +87,7 @@
                 <th>Price (₹)</th>
                 <th>Amount (₹)</th>
                 <th>Discount (%)</th>
-                <th>Tax (%)</th>
+                <th>GST (%)</th>
                 <th>Net Amount (₹)</th>
               </tr>
           </thead>
@@ -102,7 +108,7 @@
             <tr>
               <td><%= j+1 %></td>
               <td><%= data.quotations[0].quotationProducts[j].productId %></td>
-              <td><img src="/dist/img/products/<%= data.quotations[0].quotationProducts[j].productId %>/0.jpg" class="img-fluid mb-2"/><b><%= data.quotations[0].quotationProducts[j].productName %></b></td>
+              <td><img width = "300" height = "500" src="/dist/img/products/<%= data.quotations[0].quotationProducts[j].productId %>/0.jpg" class="img-fluid mb-2"/><br><b><%= data.quotations[0].quotationProducts[j].productName %></b></td>
               <td><%= data.quotations[0].quotationProducts[j].quantity %></td>
               <td><%= data.quotations[0].quotationProducts[j].price %></td>
               <td class = "qSubVals" ><%= data.quotations[0].quotationProducts[j].amount %></td>
@@ -148,7 +154,7 @@
                 <td id = "tDisc">₹0</td>
               </tr>
               <tr>
-                <th>Tax:</th>
+                <th>GST:</th>
                 <td id = "tTax">₹0</td>
               </tr>
               <tr>

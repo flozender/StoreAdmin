@@ -126,7 +126,7 @@
             <a href="/products/gallery" id = "getGallery" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Gallery
+                View Gallery
               </p>
             </a>
           </li>
@@ -140,18 +140,36 @@
           </li>
 
           <li class="nav-header">Sales</li>
-          <li class="nav-item">
-            <a href="/billing/quotation" id = "getQuot" class="nav-link">
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" id = "quot" class="nav-link">
               <i class="nav-icon fas fa-money-bill"></i>
-              <p>Quotation</p>
+              <p>
+                Quotations
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/billing/quotation/get" id = "getQuot" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Get all quotations</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/billing/quotation" id = "addQuot" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create new quotation</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
+  
+          <!-- <li class="nav-item">
             <a href="/billing/invoice" id = "getInvoice" class="nav-link">
               <i class="nav-icon fas fa-cash-register"></i>
               <p>Invoice Generation</p>
             </a>
-          </li>
+          </li> -->
           <!-- <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
