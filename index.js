@@ -8,7 +8,8 @@ var path = require('path');
 var glob = require('glob');
 const mongoose = require('mongoose');
 let moment = require('moment');
-
+const upload = require('express-fileupload');
+const fs = require('fs');
 let config = require('./util/config');
 let middleware = require('./util/middleware.js');
 
@@ -18,8 +19,8 @@ serverRoute = config.serverAddress + PORT;
 clientRoute = config.clientAddress + PORT;
 
 // Production
-// serverRoute = "https://itwarestoremanage.herokuapp.com";
-// clientRoute = "https://itwarestoremanage.herokuapp.com";
+serverRoute = "https://itwarestoremanage.herokuapp.com";
+clientRoute = "https://itwarestoremanage.herokuapp.com";
 
 const app = express();
 app.options('*', cors());
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(cookieParser());
+app.use(upload());
 
 app.use('/', express.static(__dirname + '/'));
 // app.use('/ide', express.static(path.resolve('../IDE')));
@@ -45,6 +47,7 @@ app.use('/products/view', express.static(__dirname + '/'));
 
 app.use('/billing', express.static(__dirname + '/'));
 app.use('/billing/quotation', express.static(__dirname + '/'));
+
 app.use( express.static(__dirname + '/'));
 
 
@@ -251,6 +254,26 @@ app.get('/billing/quotation', async(req, res) => {
   });
 });
 
+app.get('/billing/quotation/get', async(req, res) => {
+  let options = {
+    url : serverRoute + '/quotations',
+    method: 'get',
+    headers: {
+      'authorization': req.cookies.token
+    },
+    json: true
+  }
+  request(options, function(err, response, body){
+    if (!body){
+      let body = {
+        message: "No Quotations found"
+      };
+    }
+    // console.log(body);
+    res.render('billing/get-quotations', {data: body});
+  });
+});
+
 app.get('/customers/add', async(req, res) => {
     // console.log(body);
     let body = {};
@@ -260,10 +283,10 @@ app.get('/customers/add', async(req, res) => {
 });
 
 
-app.get('/billing/quotation/add', async(req, res) => {
+app.get('/billing/quotation/add/:customerId/:quotationId', async(req, res) => {
 
- let customerId = req.cookies.customerId;
- let quotationId = req.cookies.quotationId;
+ let customerId = req.params.customerId;
+ let quotationId = req.params.quotationId;
  let options = {
   url : serverRoute + '/quotations',
   method: 'post',
@@ -322,6 +345,7 @@ request(options, function(err, response, body){
       
         body.quotations = productQuot;
         body.quotationId = quotationId;
+
         // console.log(JSON.stringify(body, null, 2));      
         res.render('billing/add-quotation', {data: body});
       });
@@ -330,9 +354,9 @@ request(options, function(err, response, body){
 });
 });
 
-app.get('/billing/quotation/print', async(req, res) => {
-  let customerId = req.cookies.customerId;
-  let quotationId = req.cookies.quotationId;
+app.get('/billing/quotation/print/:customerId/:quotationId', async(req, res) => {
+  let customerId = req.params.customerId;
+  let quotationId = req.params.quotationId;
 
    let options = {
      url : serverRoute + '/customers/id/' + customerId,
@@ -400,11 +424,12 @@ app.get('/billing/invoice', async(req, res) => {
 });
 
 app.post('/uploadImage/:productId', async (req, res) => {
+  console.log(req.files);
   if (req.files){
     // console.log(req.files);
     fs.readdir('./dist/img/products/' + req.params.productId, (err, lenOfFiles) => {
       let fLen = lenOfFiles.length;
-      let file = req.files.productImage,
+      let file = req.files.iProdImg,
       filename = file.name;
       console.log("LENGTH",fLen);
       file.mv("./dist/img/products/" + req.params.productId +"/" + fLen + '.jpg', function(err){
@@ -413,16 +438,12 @@ app.post('/uploadImage/:productId', async (req, res) => {
         res.send("error occured");
       }
       else{
-        res.json({
-          success: true,
-          message: "uploaded",
-          filename: filename
-        });
+        res.redirect(clientRoute + "/products/add" );
       }
       });  
     });
   } else{
-    res.send("Failed");
+    res.render("message");
   }
 });
 

@@ -148,8 +148,13 @@
                   <!-- /.col -->
                   <div class="col-md-6">
                       <div class="form-group">
-                        <label for="iProdImg">File input</label>
-                        <div class="input-group">
+                        <form id = "imgUploader" action="" method="post" enctype="multipart/form-data">
+                          <h5>Upload File Here</h5>
+                          <input type="file" name="iProdImg" value="">
+                          <input id = "reset" type="submit" />
+                      </form>
+                        <!-- <label for="iProdImg">File input</label> -->
+                        <!-- <div class="input-group">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" id="iProdImg">
                             <label class="custom-file-label" for="iProdImg">Choose Photos</label>
@@ -157,7 +162,7 @@
                           <div class="input-group-append">
                             <span class="input-group-text" id="iSubmit">Upload</span>
                           </div>
-                        </div>
+                        </div> -->
                       </div> 
                     <!-- /.form-group -->
                   </div>
@@ -225,6 +230,8 @@
   window.onload = function() {
 document.getElementById('addProd').className = 'nav-link active';
 document.getElementById('prod').className = 'nav-link active';
+document.getElementById("iProdImg").selectedIndex = -1;
+
 
 };
 </script>
@@ -265,30 +272,13 @@ document.getElementById('prod').className = 'nav-link active';
         }
     });
 
-    $( "#iSubmit" ).click(function() {
-
-  let productId = document.getElementById("iProdId").value;
-  let productImage = document.getElementById("iProdImg").value;
-
-
-
-  var txt = $('#iProdId');  
-
-  if (txt.val() != null && txt.val() != '') {  
-        let postData = {
-            productId: productId,
-            productImage: productImage
-        }
-        console.log(postData);
-        $.post("<%= data.serverRoute %>/uploadImage/"+ productId, postData, function(data, status, jqXHR){
-            window.location = "<%= data.clientRoute %>/products/add";
-        });
-    } else {  
-      alert('Please enter product ID');  
-    }
-
-
+    
+$( "#iProdId" ).change(function() {
+  $('#imgUploader').attr('action', '<%= data.serverRoute %>/uploadImage/' + $(this).val());
 });
+
+
+
     </script>
 </body>
 </html>

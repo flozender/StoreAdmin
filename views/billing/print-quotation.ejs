@@ -110,11 +110,11 @@
               <td><%= data.quotations[0].quotationProducts[j].productId %></td>
               <td><img width = "300" height = "500" src="/dist/img/products/<%= data.quotations[0].quotationProducts[j].productId %>/0.jpg" class="img-fluid mb-2"/><br><b><%= data.quotations[0].quotationProducts[j].productName %></b></td>
               <td><%= data.quotations[0].quotationProducts[j].quantity %></td>
-              <td><%= data.quotations[0].quotationProducts[j].price %></td>
-              <td class = "qSubVals" ><%= data.quotations[0].quotationProducts[j].amount %></td>
+              <td id = "commaPrice"><%= data.quotations[0].quotationProducts[j].price %></td>
+              <td id = "commaAmount" class = "qSubVals" ><%= data.quotations[0].quotationProducts[j].amount %></td>
               <td class = "qDiscVals"><%= data.quotations[0].quotationProducts[j].discount %></td>
               <td class = "qTaxVals"><%= data.quotations[0].quotationProducts[j].tax %></td>
-              <td class = "qNetVals"><%= data.quotations[0].quotationProducts[j].net %></td>
+              <td id = "commaNet" class = "qNetVals"><%= data.quotations[0].quotationProducts[j].net %></td>
             </tr>
             <% } %>
             <% } %>
@@ -231,13 +231,13 @@
     totalTax = taxArray.reduce((a, b) => a + b, 0); 
     totalNet = netArray.reduce((a, b) => a + b, 0);
   
-    $("#tSub").html("₹" +totalSub);
-  
-    $("#tDisc").html("-₹" +totalDisc);
-  
-    $("#tTax").html("+₹" +totalTax);
-  
-    $("#tNet").html("₹" +totalNet);
+  $("#tSub").html("₹" +numberWithCommas(totalSub));
+
+  $("#tDisc").html("-₹" +numberWithCommas(totalDisc));
+
+  $("#tTax").html("+₹" +numberWithCommas(totalTax));
+
+  $("#tNet").html("₹" +numberWithCommas(totalNet));
   
   });
 

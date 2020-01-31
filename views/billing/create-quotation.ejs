@@ -206,7 +206,7 @@ $( "#qSubmit" ).click(function() {
     Cookies.set('customerId', customerId);
     Cookies.set('quotationId', txt.val());
 
-    window.location = "<%= data.clientRoute %>/billing/quotation/add";
+    window.location = "<%= data.clientRoute %>/billing/quotation/add/"+ customerId +"/" + txt.val();
   
     } else {  
       alert('Please enter quotation ID');  
