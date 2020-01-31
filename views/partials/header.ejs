@@ -9,72 +9,11 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/home" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="contact" class="nav-link">Contact</a>
-      </li>
     </ul>
 
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -101,11 +40,6 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-          <i class="fas fa-th-large"></i>
-        </a>
       </li>
     </ul>
   </nav>
@@ -156,35 +90,37 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/customers/add" class="nav-link">
+                <a href="/customers/add" id= "addCust" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add new customer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/customers/update" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Update existing customer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/customers/delete" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Delete customer</p>
                 </a>
               </li>
             </ul>
           </li>
 
           <li class="nav-header">Product Management</li>
-          <li class="nav-item">
-            <a href="/products/get" id = "getProd" class="nav-link">
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" id = "prod" class="nav-link">
               <i class="nav-icon far fa-eye"></i>
               <p>
-                View Products
-                <span class="badge badge-info right"></span>
+                Products
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/products/get" id = "getProd" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Get all products</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/products/add" id = "addProd" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add new product</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="/products/gallery" id = "getGallery" class="nav-link">
