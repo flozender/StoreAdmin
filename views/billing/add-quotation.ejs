@@ -263,11 +263,11 @@
               <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-12">
-                  <a href="invoice-print" target="_blank" class="btn btn-default billDownload"><i class="fas fa-print"></i> Print</a>
+                  <a href="invoice-print" target="_blank" class="btn btn-default billDownload"><i class="fas fa-print"></i> Print Quotation</a>
                   <button type="button" class="btn btn-success float-right"><i class="far fa-envelope"></i> Email Quotation to Client
                   </button>
-                  <button type="button" class="btn btn-primary float-right billDownload" style="margin-right: 5px;">
-                    <i class="fas fa-download "></i> Generate PDF
+                  <button type="button" class="btn btn-primary float-right billPresent" style="margin-right: 5px;">
+                    <i class="fas fa-download "></i> Generate Presentation
                   </button>
                 </div>
               </div>
@@ -460,6 +460,11 @@ $( ".billDownload" ).click(function() {
   let quotationId = "<%= data.quotationId %>"; 
   let customerId = "<%= data.customerId %>"; 
   window.location = "<%= data.clientRoute %>/billing/quotation/print/" + customerId + "/" + quotationId;
+})
+$( ".billPresent" ).click(function() {
+  let quotationId = "<%= data.quotationId %>"; 
+  let customerId = "<%= data.customerId %>"; 
+  window.location = "<%= data.clientRoute %>/billing/quotation/present/" + customerId + "/" + quotationId;
 })
 </script>
 </body>

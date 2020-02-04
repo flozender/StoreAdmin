@@ -12,15 +12,15 @@ const upload = require('express-fileupload');
 const fs = require('fs');
 let config = require('./util/config');
 let middleware = require('./util/middleware.js');
-
+let async = require('async');
 let PORT = process.env.PORT || 80;
 let serverRoute, clientRoute;
 serverRoute = config.serverAddress + PORT;
 clientRoute = config.clientAddress + PORT;
 
 // Production
-serverRoute = "https://itwarestoremanage.herokuapp.com";
-clientRoute = "https://itwarestoremanage.herokuapp.com";
+// serverRoute = "https://itwarestoremanage.herokuapp.com";
+// clientRoute = "https://itwarestoremanage.herokuapp.com";
 
 const app = express();
 app.options('*', cors());
@@ -409,6 +409,82 @@ app.get('/billing/quotation/print/:customerId/:quotationId', async(req, res) => 
    });
  });
 
+ 
+app.get('/billing/quotation/present/:customerId/:quotationId', async(req, res) => {
+  let customerId = req.params.customerId;
+  let quotationId = req.params.quotationId;
+
+   let options = {
+     url : serverRoute + '/customers/id/' + customerId,
+     method: 'get',
+     headers: {
+       'authorization': req.cookies.token
+     },
+     json: true
+   }
+ 
+ request(options, function(err, response, body){
+  
+     // console.log(body);
+     
+     var datetime = new Date();
+ 
+     body = body[0];
+     body.serverRoute = serverRoute;
+     body.today = datetime.toDateString();
+     body.clientRoute = clientRoute;
+ 
+     let options = {
+       url : serverRoute + '/products',
+       method: 'get',
+       headers: {
+         'authorization': req.cookies.token
+       },
+       json: true
+     }
+ 
+     request(options, function(err, response, productBody){
+       body.products = productBody;
+ 
+       let options = {
+         url : serverRoute + '/quotations/' + quotationId,
+         method: 'get',
+         headers: {
+           'authorization': req.cookies.token
+         },
+         json: true
+       }
+       request(options, function(err, response, productQuot){
+        let i;
+        body.quotations = productQuot;
+        body.quotationId = quotationId;
+        // let imagesFiles = [];
+        // for (i = 0; i < body.quotations[0].quotationProducts.length; i++){  
+        //   let productId = body.quotations[0].quotationProducts[i].productId;
+        //   getImages(productId, function (err, data){
+        //     imagesFiles.push(data);
+        //   });
+        // }
+
+        // console.log(imagesFiles);
+
+        res.render('billing/get-presentation', {data: body});
+       });
+     });
+   });
+ });
+
+app.get('/getImages/:productId', async(req, res) => {
+  let productId = req.params.productId;
+  glob("dist/img/products/"+ productId +"/*.*", null, function (er, files) {
+      if (er){
+          res.send("Error");
+      }
+      // console.log(data);
+      res.send(files);
+  });
+});
+
 app.get('/message', async(req, res) => {
   let body = {
     message:"Available in Full Version"
@@ -428,10 +504,19 @@ app.post('/uploadImage/:productId', async (req, res) => {
   if (req.files){
     // console.log(req.files);
     fs.readdir('./dist/img/products/' + req.params.productId, (err, lenOfFiles) => {
-      let fLen = lenOfFiles.length;
+      let fLen;
+      if (err){
+        fLen = 0
+      } else {
+        fLen = lenOfFiles.length;
+      }
+
       let file = req.files.iProdImg,
       filename = file.name;
       console.log("LENGTH",fLen);
+      if (!fs.existsSync("./dist/img/products/" + req.params.productId )){
+        fs.mkdirSync("./dist/img/products/" + req.params.productId );
+    }
       file.mv("./dist/img/products/" + req.params.productId +"/" + fLen + '.jpg', function(err){
         if(err){
         console.log(err);

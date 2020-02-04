@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ITWare India | Presentation</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 4 -->
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script>
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  </script>
+  <style type="text/css" media="print">
+    @page { size: landscape; }
+    
+  </style>
+</head>
+<body>
+<div class="wrapper" id = "bill">
+  <!-- Main content -->
+  <section class="invoice">
+    <!-- title row -->
+    <div class="row">
+      <div class="col-12">
+        <h2 class="page-header">
+          <i class="fas fa-globe"></i> ITWare India
+          <small class="float-right"> </small>
+        </h2>
+        <!-- <b>Quotation ID: <%= data.quotationId %></b><br> -->
+        <br>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- info row -->
+
+    <!-- /.row -->
+
+    <!-- Table row -->
+    <div class="row">
+      <div class="col-12 table-responsive">
+        <table class="table table-striped">
+          <!-- <thead>
+            <tr>
+                <th>#</th>
+                <th>Product ID</th>
+                <th>Description</th>
+                <th>Price (₹)</th>
+              </tr>
+          </thead> -->
+          <tbody>
+            <% if (data.quotations.length === 0 || data.quotations[0].quotationProducts.length === 0){ %>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            <% } else { %>
+                <% for (let j = 0; j < data.quotations[0].quotationProducts.length; j++ ){ %>
+                <tr>
+                <!-- <td><%= j+1 %></td> -->
+                <!-- <td><%= data.quotations[0].quotationProducts[j].productId %></td> -->
+                <td id = "<%= data.quotations[0].quotationProducts[j].productId %>" class = "productDesc">
+                </td>
+                <!-- <td><%= data.quotations[0].quotationProducts[j].price %></td> -->
+                </tr>
+                <% } %>
+            <% } %>
+            </tbody>
+        </table>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <!-- accepted payments column -->
+      <div class="col-6">
+        <!-- <p class="lead">Payment Methods:</p>
+        <img src="../../dist/img/credit/visa.png" alt="Visa">
+        <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+        <img src="../../dist/img/credit/american-express.png" alt="American Express">
+        <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+
+        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+          Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr
+          jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+        </p> -->
+      </div>
+
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- ./wrapper -->
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<script src="../../dist/js/jspdf.min.js"></script>
+
+
+<script type="text/javascript"> 
+  
+  $(document).ready(function() {
+
+  var doc = new jsPDF({
+    orientation: 'landscape',
+    unit: 'in',
+    format: [1000, 1000]
+    })
+
+function getImgFromUrl(logo_url, callback) {
+    var img = new Image();
+    img.src = logo_url;
+    img.onload = function () {
+        callback(img);
+    };
+}
+function generatePDF(img, callback){
+    doc.addImage(img, 'JPEG', xcor, ycor);
+    callback(true);
+}
+
+  let productId;
+  let xcor = 0;
+  let ycor = 0;
+
+  $('.productDesc').each(function (index) {
+       productId =  $(this).attr('id');
+       $.ajax({url: "<%= data.serverRoute %>/getImages/"+productId, success: function(data){
+                let itemProcessed = 0;
+                data.forEach(element => {
+                    // getImgFromUrl('/'+element, function (img) {
+                    //     generatePDF(img, function (status){
+                    //         console.log("done", itemProcessed, data.length);
+                    //         itemProcessed++;
+                    //         ycor = ycor + 8;
+                    //         if (itemProcessed === data.length){
+                    //             doc.save("test.pdf");
+                    //         }
+                    //     });
+                    // });
+                        $('#'+productId).append('<center><br><img src=/' + element +' class="img-fluid mb-2"/><br></center>');
+                });
+            }, async: false
+        });   
+
+  });
+
+    window.addEventListener("load", window.print());
+  });
+
+
+
+
+  </script>
+</body>
+</html>
