@@ -19,8 +19,8 @@ serverRoute = config.serverAddress + PORT;
 clientRoute = config.clientAddress + PORT;
 
 // Production
-// serverRoute = "https://itwarestoremanage.herokuapp.com";
-// clientRoute = "https://itwarestoremanage.herokuapp.com";
+serverRoute = "https://itwarestoremanage.herokuapp.com";
+clientRoute = "https://itwarestoremanage.herokuapp.com";
 
 const app = express();
 app.options('*', cors());
