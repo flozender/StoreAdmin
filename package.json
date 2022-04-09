@@ -119,7 +119,7 @@
     "jsgrid": "^1.5.3",
     "jsonwebtoken": "^8.5.1",
     "jszip": "^3.2.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.8.10",
     "mongoose-unique-validator": "^2.0.3",
     "overlayscrollbars": "^1.10.0",
