@@ -158,7 +158,7 @@
     "rollup-plugin-babel": "^4.3.3",
     "set-value": "^3.0.1",
     "style-loader": "^1.0.1",
-    "terser": "^4.4.2"
+    "terser": "^4.8.1"
   },
   "directories": {
     "doc": "docs"
