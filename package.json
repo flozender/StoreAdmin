@@ -118,7 +118,7 @@
     "jqvmap-novulnerability": "^1.5.1",
     "jsgrid": "^1.5.3",
     "jsonwebtoken": "^8.5.1",
-    "jszip": "^3.2.2",
+    "jszip": "^3.7.0",
     "moment": "^2.24.0",
     "mongoose": "^5.8.10",
     "mongoose-unique-validator": "^2.0.3",
