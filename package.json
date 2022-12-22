@@ -117,7 +117,7 @@
     "jquery-validation": "^1.19.1",
     "jqvmap-novulnerability": "^1.5.1",
     "jsgrid": "^1.5.3",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "jszip": "^3.2.2",
     "moment": "^2.24.0",
     "mongoose": "^5.8.10",
